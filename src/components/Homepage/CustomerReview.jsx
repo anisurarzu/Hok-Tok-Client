@@ -56,7 +56,7 @@ const AboutUs = () => {
           >
             <div className="aspect-w-16 aspect-h-9">
               <Image
-                src="https://www.interiorconceptsbd.com/images/shop-interior/cloth-shop-banner.jpg" // Replace with your image
+                src={products?.[0]?.images?.[0]}// Replace with your image
                 alt="HOKTOK showroom"
                 width={800}
                 height={500}
