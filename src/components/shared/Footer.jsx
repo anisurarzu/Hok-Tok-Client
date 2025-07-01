@@ -1,8 +1,30 @@
+"use client";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Footer = () => {
+  const [footer, setFooter] = useState([]);
+
+  console.log("footer", footer);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(
+          "https://hoktokserver-1.onrender.com/api/footer"
+        );
+        if (res?.status === 200) {
+          setFooter(res?.data);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProduct();
+  }, []);
   return (
     <div className="bg-gray-900 text-white">
       {/* Top Section */}
@@ -56,7 +78,7 @@ const Footer = () => {
           <h6 className="text-lg font-semibold mb-4">Payment Methods</h6>
           <div className="flex items-center gap-4">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+              src={footer?.data?.[0]?.paymentMethodImages}
               alt="Visa"
               className="w-12 h-auto"
             />
@@ -68,19 +90,14 @@ const Footer = () => {
         <div>
           <h6 className="text-lg font-semibold mb-4">Need Help?</h6>
           <p className="text-sm text-gray-400 mb-4">
-            We’re here for you 24/7. Reach out to us through Messenger or call
-            anytime, day or night, for the support you need.
+            {footer?.data?.[0]?.addressOne}
           </p>
           <div className="space-y-2">
             <p className="text-sm text-gray-400">
-              Experience Center: <br />
-              Sheitech Ayaan, House 58, Road 6 & 11, Block C, Level 2, Banani,
-              Dhaka
+               {footer?.data?.[0]?.addressTwo}
             </p>
-            <p className="text-sm text-gray-400">
-              Email: hooktok@gmail.com
-            </p>
-            <p className="text-sm text-gray-400">Phone: +88 09678 332211</p>
+            <p className="text-sm text-gray-400">Email:{footer?.data?.[0]?.email?.[0]}</p>
+            <p className="text-sm text-gray-400">Phone: {footer?.data?.[0]?.phone}</p>
           </div>
         </div>
       </footer>

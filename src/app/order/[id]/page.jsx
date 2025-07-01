@@ -127,7 +127,7 @@ export default function OrderPage() {
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!product) return <div className="text-center py-20">Product not found</div>;
 
-  const shippingCost = formik.values.delivery === "inside" ? 70 : 120;
+  const shippingCost = formik.values.delivery === "inside" ? 80 : 130;
   const total = (product.price * quantity) + shippingCost;
 
   return (
@@ -384,7 +384,7 @@ export default function OrderPage() {
                       checked={formik.values.delivery === "inside"}
                       onChange={formik.handleChange}
                     />
-                    <span className="ml-2">Inside Dhaka (70 TK)</span>
+                    <span className="ml-2">Inside Dhaka (80 TK)</span>
                   </label>
                   <label className="inline-flex items-center">
                     <input
@@ -395,7 +395,7 @@ export default function OrderPage() {
                       checked={formik.values.delivery === "outside"}
                       onChange={formik.handleChange}
                     />
-                    <span className="ml-2">Outside Dhaka (120 TK)</span>
+                    <span className="ml-2">Outside Dhaka (130 TK)</span>
                   </label>
                 </div>
               </div>
